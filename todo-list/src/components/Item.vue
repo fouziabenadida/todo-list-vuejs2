@@ -1,7 +1,7 @@
 <template>
   <div class="card my-2 item-todo">
     <h5>{{ tache }}</h5>
-    <div class="button-supr btn btn-danger">X</div>
+    <div @click="suppression" class="button-supr btn btn-danger">X</div>
   </div>
 </template>
 

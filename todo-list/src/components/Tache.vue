@@ -4,15 +4,15 @@
     <form >
     <div class="form-group">
   <label for="action">Action</label>
-  <input type="text" id="action" class="form-control">
+  <input v-model="formData.tache" type="text" id="action" class="form-control">
     </div>
-    <button class="btn btn-primary mt-4" >Créer une tâche </button>
+    <button @click.prevent="createTache" class="btn btn-primary mt-4 mb-4" >Créer une tâche </button>
 
     </form>
   
     <ul>
         <li v-bind:key="index" v-for="(tache,index) in tacheTable">
-        <item-vue :tache="tache" :suppression="suppression"></item-vue>
+        <item-vue v-bind:key="index" :tache="tache" :suppression="suppression"></item-vue>
         </li>
     </ul>
 
@@ -36,6 +36,16 @@ export default{
     },
     components:{
         'item-vue': Item
+    },
+    methods:{
+        createTache: function(){
+            this.tacheTable.push(this.formData.tache)
+            this.formData.tache= ''
+        },
+        suppression: function(e){
+            this.tacheTable.splice(e.target.parentNode.id, 1)
+        }
+
     }
     
 }
@@ -46,5 +56,6 @@ export default{
 <style scoped>
 ul{
     list-style-type: none;
+    padding: 0;
 }
 </style>
